@@ -151,6 +151,13 @@
                 </table>
             </form>
         </div>
+        <h2>All my posts</h2>
+        @foreach ($posts as $item)
+            <div class="content">
+                <h3>{{ $item['title'] }}</h3>
+                <p>{{ $item['body'] }}</p>
+            </div>
+        @endforeach
     @else
         <div class="content">
             <form action="/register">
@@ -185,14 +192,32 @@
                     </tr>
                 </table>
             </form>
+            <form action="/login">
+                @csrf
+                <table>
+                    <tr>
+                        <td>
+                            <label for="loginName">Name :</label>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="Your name.." name="loginName" id="loginName">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="loginPassword">Password :</label>
+                        </td>
+                        <td>
+                            <input type="password" placeholder="Your password.." name="loginPassword" id="LoginPassword">
+                        </td>
+                    </tr>
+                    <tr style="text-align:center">
+                        <td colspan="2"> <button type="submit">login</button></td>
+                    </tr>
+                </table>
+            </form>
         </div>
-        <h2>All POSTS</h2>
-        @foreach ($posts as $item)
-            <div>
-                <h3>{{ $item['title'] }}</h3>
-                <p>{{ $item['body'] }}</p>
-            </div>
-        @endforeach
+
     @endauth
 
     <footer>

@@ -10,8 +10,8 @@ class UserController extends Controller
 {
     public function home()
     {
-        $users = User::select('id', 'name');
-        $posts = Post::all();
+        //$posts = Post::where('user_id', auth()->id())->get();
+        $posts = auth()->user()->user_posts()->latest()->get();
         return view('home', ['posts' => $posts]);
     }
     public function register(Request $request)
@@ -25,6 +25,18 @@ class UserController extends Controller
         $userData['password'] = bcrypt($userData['password']);
         $user = User::create($userData);
         auth()->login($user);
+        return redirect('/');
+    }
+
+    public function login(Request $request)
+    {
+        $userData = $request->validate(['loginName' => 'required', 'loginPassword' => 'required']);
+        if (auth()->attempt([
+            'name' => $userData['loginName'],
+            'password' => $userData['loginPassword']
+        ])) {
+            $request->session()->regenerate();
+        }
         return redirect('/');
     }
     public function logout()
