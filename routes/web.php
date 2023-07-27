@@ -16,8 +16,11 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', [UserController::class, 'home']);
-Route::get('/register', [UserController::class, 'register']);
+Route::post('/register', [UserController::class, 'register']);
 Route::get('/logout', [UserController::class, 'logout']);
 
 Route::get('/addPost', [PostController::class, 'addPost']);
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/deletePost/{post}', [PostController::class, 'deletePost']);
+Route::get('/editPost/{post}', [PostController::class, 'showPost']);
+Route::put('/editPost/{post}', [PostController::class, 'editPost']);
+Route::post('/login', [UserController::class, 'login']);

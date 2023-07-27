@@ -23,7 +23,7 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function user_posts()
+    public function userPosts()
     {
         return $this->hasMany(Post::class, 'user_id');
     }

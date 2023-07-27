@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function home()
     {
         //$posts = Post::where('user_id', auth()->id())->get();
-        $posts = auth()->user()->user_posts()->latest()->get();
-        return view('home', ['posts' => $posts]);
+        if (Auth::check()) {
+            $posts = auth()->user()->userPosts()->latest()->get();
+            return view('home', ['posts' => $posts]);
+        }
+        return view('home');
     }
     public function register(Request $request)
     {

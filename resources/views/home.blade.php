@@ -25,8 +25,6 @@
         }
 
         * {
-            padding: 0px;
-            margin: 0px;
             box-sizing: border-box;
         }
 
@@ -156,11 +154,13 @@
             <div class="content">
                 <h3>{{ $item['title'] }}</h3>
                 <p>{{ $item['body'] }}</p>
+                <p><a href="/editPost/{{ $item->id }}">Edit</a></p>
+                <a href="/deletePost/{{ $item->id }}"><button>Delete</button></a>
             </div>
         @endforeach
     @else
         <div class="content">
-            <form action="/register">
+            <form action="/register" method="POST">
                 @csrf
                 <table>
                     <tr>
@@ -192,7 +192,7 @@
                     </tr>
                 </table>
             </form>
-            <form action="/login">
+            <form action="/login" method="POST">
                 @csrf
                 <table>
                     <tr>
