@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -17,3 +18,5 @@ use App\Http\Controllers\UserController;
 Route::get('/', [UserController::class, 'home']);
 Route::get('/register', [UserController::class, 'register']);
 Route::get('/logout', [UserController::class, 'logout']);
+
+Route::get('/addPost', [PostController::class, 'addPost']);

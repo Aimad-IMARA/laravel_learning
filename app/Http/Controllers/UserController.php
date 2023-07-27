@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,9 @@ class UserController extends Controller
 {
     public function home()
     {
-        return view('home');
+        $users = User::select('id', 'name');
+        $posts = Post::all();
+        return view('home', ['posts' => $posts]);
     }
     public function register(Request $request)
     {

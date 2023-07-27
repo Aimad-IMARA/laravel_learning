@@ -7,6 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home - testing</title>
     <style>
+        .button {
+            width: 100px;
+            border: 1px solid black;
+            padding: 5px;
+            float: right;
+            text-align: center;
+            margin: 5px;
+            text-decoration: none;
+            color: rgb(154, 3, 3);
+            background-color: gainsboro;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: rgb(156, 156, 156);
+        }
+
         * {
             padding: 0px;
             margin: 0px;
@@ -58,9 +75,9 @@
             font-style: oblique;
         }
 
-        input {
+        input,
+        textarea {
             width: 70%;
-            height: 30px;
             padding: 5px;
             border: 2px solid slategrey;
             border-radius: 5px;
@@ -105,8 +122,35 @@
         </h1>
     </header>
     @auth
-        <p>Conrats you're logged!</p>
-        <a href="/logout">Click here to logout</a>
+        <div>
+            <a href="/logout" class="button">Logout</a>
+        </div>
+        <div>
+            <form style="width:80%;margin:auto;" action="/addPost">
+                @csrf
+                <table>
+                    <tr>
+                        <td>
+                            <label for="title">Title :</label>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="Title.." name="title" id="title">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="body">Content :</label>
+                        </td>
+                        <td>
+                            <textarea name="body" id="" cols="30" rows="10"></textarea>
+                        </td>
+                    </tr>
+                    <tr style="text-align:center">
+                        <td colspan="2"> <button type="submit">Add post</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
     @else
         <div class="content">
             <form action="/register">
@@ -142,6 +186,13 @@
                 </table>
             </form>
         </div>
+        <h2>All POSTS</h2>
+        @foreach ($posts as $item)
+            <div>
+                <h3>{{ $item['title'] }}</h3>
+                <p>{{ $item['body'] }}</p>
+            </div>
+        @endforeach
     @endauth
 
     <footer>
